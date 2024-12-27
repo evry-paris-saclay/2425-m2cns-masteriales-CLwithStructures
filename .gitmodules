@@ -1,0 +1,3 @@
+[submodule "data/rotated-mnist"]
+	path = data/rotated-mnist
+	url = https://github.com/evry-paris-saclay/rotated-mnist
