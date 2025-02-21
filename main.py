@@ -6,9 +6,9 @@ from torch import tensor
 
 # Main Script
 if __name__ == "__main__":
-    #with open('embeddings.p', 'rb') as f:
+    #with open('embeddings_EXPERIMENT_3.p', 'rb') as f:
     #       embeddings = pickle.load(f, encoding='latin1')
-    
+
     # Load datasets
     dataset_names, datasets_list = load_datasets()
     mnist_data = limit_dataset_size(datasets_list[0], max_size=10000)
@@ -35,11 +35,14 @@ if __name__ == "__main__":
   
     
     # Save embeddings
-    with open('embeddings_EXPERIMENT_1.p', 'wb') as f:
+    with open('embeddings_EXPERIMENT.p', 'wb') as f:
         pickle.dump((datasets_names, embeddings), f)
- 
+    
 total_complexity = calculate_total_complexity(embeddings)
 sequential_heterogeneity = calculate_sequential_heterogeneity(embeddings)
 
 print(f"Total Complexity: {total_complexity:.4f}")
 print(f"Sequential Heterogeneity: {sequential_heterogeneity:.4f}")
+
+
+
