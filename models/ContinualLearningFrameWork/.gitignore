@@ -5,9 +5,9 @@
 __pycache__/
 
 store/models/mM*
-store/plots
+#store/plots
 store/datasets
-store/results
+#store/results
 
 venv
 data/MNIST

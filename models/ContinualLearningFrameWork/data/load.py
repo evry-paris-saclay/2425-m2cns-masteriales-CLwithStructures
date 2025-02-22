@@ -127,9 +127,9 @@ def get_context_set(name, scenario, contexts, data_dir="./datasets", only_config
         import data.rotated_mnist
         num_tasks = contexts
         trains, tests = data.rotated_mnist.tasks_rotMNIST_datasets(
-            num_tasks=num_tasks, per_task_rotation=45)
+            num_tasks=num_tasks, per_task_rotation=24)
         # Define the new order
-        new_order = [1, 3, 0, 4, 2, 7, 5, 6]
+        new_order = [7, 3, 11, 0, 14, 9, 2, 10, 8, 6, 5, 1, 12, 13, 4]
 
         # Reorganize the datasets
         train_datasets = [trains[i] for i in new_order]
