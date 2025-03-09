@@ -79,20 +79,30 @@ def cosine_distance(e_t, e_t_prime):
     cosine_sim = np.dot(v_t, v_t_prime) / (norm_v_t * norm_v_t_prime)
     return 1 - cosine_sim  # Cosine distance
 
-def calculate_total_complexity(embeddings):
+def calculate_total_complexity(embeddings, new_order = None):
     """
     Compute total complexity C(T) as the sum of cosine distances to a reference vector e_0.
     """
+    if (new_order != None):
+        emb = [embeddings[i] for i in new_order]
+    else:
+        emb = embeddings
+    
     e_0 = get_vector(embeddings[0])  # The trivial Task !! what is the trivial task ? is it the embedding vector of normal MNIST ?
-    total_complexity = sum(cosine_distance(get_vector(e), e_0) for e in embeddings)
+    total_complexity = sum(cosine_distance(get_vector(e), e_0) for e in emb)
     return total_complexity
 
-def calculate_sequential_heterogeneity(embeddings):
+def calculate_sequential_heterogeneity(embeddings, new_order = None):
     """
     Compute sequential heterogeneity F(T) as the sum of cosine distances between consecutive embeddings.
     """
+    if (new_order != None):
+        emb = [embeddings[i] for i in new_order]
+    else:
+        emb = embeddings
+    
     seq_heterogeneity = sum(
-        cosine_distance(get_vector(embeddings[i]), get_vector(embeddings[i+1])) 
-        for i in range(len(embeddings) - 1)
+        cosine_distance(get_vector(emb[i]), get_vector(emb[i+1])) 
+        for i in range(len(emb) - 1)
     )
     return seq_heterogeneity

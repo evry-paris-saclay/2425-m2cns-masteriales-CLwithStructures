@@ -1,17 +1,51 @@
-def plotAEvsTC(total_complexity_values,average_error_values):
-    # Scatter plot: Average Error vs Total Complexity
-    plt.figure(figsize=(8, 6))
-    plt.scatter(total_complexity_values, average_error_values, color='blue', alpha=0.7, label="Task Sequences")
+import numpy as np
+import matplotlib.pyplot as plt
 
-    # Trendline (linear regression fit)
-    z = np.polyfit(total_complexity_values, average_error_values, 1)
-    p = np.poly1d(z)
-    plt.plot(total_complexity_values, p(total_complexity_values), "r--", label="Trendline")
+def errVSsqh(sequential_heterogeneity, average_errors):
+    # Plotting
+    plt.figure(figsize=(8, 5))
+    plt.scatter(sequential_heterogeneity.values(), average_errors.values(), color='blue', label='Data points')
 
-    # Labels and Titles
-    plt.xlabel("Total Complexity")
-    plt.ylabel("Average Error")
-    plt.title("Average Error as a Function of Total Complexity")
+    # Fit linear regression line
+    x_values = np.array(list(sequential_heterogeneity.values()))
+    y_values = np.array(list(average_errors.values()))
+    m, b = np.polyfit(x_values, y_values, 1)
+    plt.plot(x_values, m * x_values + b, color='red', linestyle="--", label="Linear Fit")
+
+    # Labels and title
+    plt.xlabel("Sequential Heterogeneity")
+    plt.ylabel("Average Error Rate")
+    plt.title("Average Error vs. Sequential Heterogeneity")
     plt.legend()
-    plt.grid(True, linestyle="--", alpha=0.6)
+    plt.grid(True)
+
+    # save plot
+    plt.savefig("errVSsqh.png", dpi=300)
+
+    # Display the plot
+    plt.show()
+
+
+def errVStc(total_complexity, average_errors):
+    # Plotting total heterogeneity vs. average error rate
+    plt.figure(figsize=(8, 5))
+    plt.scatter(total_complexity.values(), average_errors.values(), color='purple', label='Data points')
+
+    # Fit linear regression line
+    x_values = np.array(list(total_complexity.values()))
+    y_values = np.array(list(average_errors.values()))
+    m, b = np.polyfit(x_values, y_values, 1)
+    plt.plot(x_values, m * x_values + b, color='red', linestyle="--", label="Linear Fit")
+
+    # Labels and title
+    plt.xlabel("Total Complexity")
+    plt.ylabel("Average Error Rate")
+    plt.title("Average Error vs. Total Complexity")
+    plt.legend()
+    plt.grid(True)
+
+    # save plot
+    plt.savefig("errVStc.png", dpi=300)
+
+    # Display the plot
     plt.show()
